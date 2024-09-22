@@ -8,7 +8,7 @@
     <name>Openfire Plugins</name>
 
     <description>Parent POM for Openfire plugins.</description>
-    <url>http://www.igniterealtime.org/projects/openfire/</url>
+    <url>https://www.igniterealtime.org/projects/openfire/plugin-archive.jsp?plugin=</url>
 
     <inceptionYear>2003</inceptionYear>
 
