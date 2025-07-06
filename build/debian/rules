@@ -2,7 +2,7 @@
 #export DH_VERBOSE=1
 
 %:
-	dh $@
+	dh $@ --with sysuser
 
 execute_after_dh_fixperms:
 	chmod -R o-rwx debian/openfire/usr/share/openfire
