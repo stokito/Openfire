@@ -6,6 +6,5 @@
 
 execute_after_dh_fixperms:
 	chmod -R o-rwx debian/openfire/usr/share/openfire
-	chmod -R o-rwx debian/openfire/var/lib/openfire
 	chmod -R o-rwx debian/openfire/var/log/openfire
 	chmod -R o-rwx debian/openfire/etc/openfire
