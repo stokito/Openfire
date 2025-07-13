@@ -3,6 +3,7 @@ Name: openfire
 Version: %{OPENFIRE_VERSION}
 Release: %{OPENFIRE_RELEASE}
 BuildRoot: %{_builddir}/%{name}-root
+BuildRequires: systemd-rpm-macros
 Source0: %{OPENFIRE_SOURCE}
 %ifarch noarch
 # Note that epoch is set here to 1, this appears to be consistent with non-Redhat
@@ -76,9 +77,6 @@ rm -rf $RPM_BUILD_ROOT%{homedir}/resources/nativeAuth/osx-ppc
 rm -rf $RPM_BUILD_ROOT%{homedir}/resources/nativeAuth/win32-x86
 rm -f $RPM_BUILD_ROOT%{homedir}/lib/*.dll
 rm -f $RPM_BUILD_ROOT%{homedir}/conf/openfire-demoboot.xml
-rm -f $RPM_BUILD_ROOT%{homedir}/dist/etc/ufw/applications.d/openfire
-rm -f $RPM_BUILD_ROOT%{homedir}/dist/usr/lib/systemd/system/openfire.service
-rm -f $RPM_BUILD_ROOT%{homedir}/dist/usr/lib/systemd/system/openfire.slice
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,6 +87,8 @@ if [ "$1" == "0" ]; then
 	/sbin/chkconfig --del openfire
 	[ -x "/etc/init.d/openfire" ] && /etc/init.d/openfire stop
 fi
+%systemd_preun openfire.service
+
 # Force a happy exit even if openfire shutdown script didn't exit cleanly.
 exit 0
 
@@ -102,8 +102,13 @@ fi
 # Trigger a restart.
 [ -x "/etc/init.d/openfire" ] && /etc/init.d/openfire condrestart
 
+%systemd_post openfire.service
+
 # Force a happy exit even if openfire condrestart script didn't exit cleanly.
 exit 0
+
+%postun
+%systemd_postun_with_restart openfire.service
 
 %files
 %defattr(-,daemon,daemon)
@@ -150,6 +155,9 @@ exit 0
 %doc %{homedir}/README.html 
 %doc %{homedir}/changelog.html
 %{_sysconfdir}/init.d/openfire
+%{_sysconfdir}/ufw/applications.d/openfire
+%{_unitdir}/openfire.service
+%{_unitdir}/openfire.slice
 %config(noreplace) %{_sysconfdir}/sysconfig/openfire
 %ifnarch noarch
 %{homedir}/jre
