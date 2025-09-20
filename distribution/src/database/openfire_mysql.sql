@@ -334,7 +334,7 @@ CREATE TABLE ofPubsubSubscription (
   state               VARCHAR(15)   NOT NULL,
   deliver             TINYINT       NOT NULL,
   digest              TINYINT       NOT NULL,
-  digest_frequency    INT           NOT NULL,
+  digest_frequency    INTEGER       NOT NULL,
   expire              VARCHAR(15),
   includeBody         TINYINT       NOT NULL,
   showValues          VARCHAR(30),
