@@ -180,28 +180,28 @@ CREATE TABLE ofMucRoom (
   naturalName         VARCHAR(255)  NOT NULL,
   description         VARCHAR(255),
   lockedDate          VARCHAR(15)      NOT NULL,
-  emptyDate           VARCHAR(15)      NULL,
+  emptyDate           VARCHAR(15),
   canChangeSubject    TINYINT       NOT NULL,
   maxUsers            INTEGER       NOT NULL,
   publicRoom          TINYINT       NOT NULL,
   moderated           TINYINT       NOT NULL,
   membersOnly         TINYINT       NOT NULL,
   canInvite           TINYINT       NOT NULL,
-  roomPassword        VARCHAR(50)   NULL,
+  roomPassword        VARCHAR(50),
   canDiscoverJID      TINYINT       NOT NULL,
   logEnabled          TINYINT       NOT NULL,
   retireOnDeletion    TINYINT       NOT NULL,
   preserveHistOnDel   TINYINT       NOT NULL,
-  subject             VARCHAR(100)  NULL,
+  subject             VARCHAR(100),
   rolesToBroadcast    TINYINT       NOT NULL,
   useReservedNick     TINYINT       NOT NULL,
   canChangeNick       TINYINT       NOT NULL,
   canRegister         TINYINT       NOT NULL,
-  allowpm             TINYINT       NULL,
-  fmucEnabled         TINYINT       NULL,
-  fmucOutboundNode    VARCHAR(255)  NULL,
-  fmucOutboundMode    TINYINT       NULL,
-  fmucInboundNodes    VARCHAR(4000) NULL,
+  allowpm             TINYINT,
+  fmucEnabled         TINYINT,
+  fmucOutboundNode    VARCHAR(255),
+  fmucOutboundMode    TINYINT,
+  fmucInboundNodes    VARCHAR(4000),
   PRIMARY KEY (serviceID,name),
   INDEX ofMucRoom_roomid_idx (roomID),
   INDEX ofMucRoom_serviceid_idx (serviceID)
@@ -233,12 +233,12 @@ CREATE TABLE ofMucAffiliation (
 CREATE TABLE ofMucMember (
   roomID              BIGINT        NOT NULL,
   jid                 TEXT          NOT NULL,
-  nickname            VARCHAR(255)  NULL,
-  firstName           VARCHAR(100)  NULL,
-  lastName            VARCHAR(100)  NULL,
-  url                 VARCHAR(100)  NULL,
-  email               VARCHAR(100)  NULL,
-  faqentry            VARCHAR(100)  NULL,
+  nickname            VARCHAR(255),
+  firstName           VARCHAR(100),
+  lastName            VARCHAR(100),
+  url                 VARCHAR(100),
+  email               VARCHAR(100),
+  faqentry            VARCHAR(100),
   PRIMARY KEY (roomID,jid(70))
 );
 
@@ -246,11 +246,11 @@ CREATE TABLE ofMucConversationLog (
   roomID              BIGINT        NOT NULL,
   messageID        BIGINT     NOT NULL,
   sender              TEXT          NOT NULL,
-  nickname            VARCHAR(255)  NULL,
+  nickname            VARCHAR(255),
   logTime             VARCHAR(15)      NOT NULL,
-  subject             VARCHAR(255)  NULL,
-  body                TEXT          NULL,
-  stanza                TEXT          NULL,
+  subject             VARCHAR(255),
+  body                TEXT,
+  stanza                TEXT,
   INDEX ofMucConversationLog_roomtime_idx (roomID, logTime),
   INDEX ofMucConversationLog_time_idx (logTime),
   INDEX ofMucConversationLog_msg_id (messageID)
@@ -265,11 +265,11 @@ CREATE TABLE ofPubsubNode (
   leaf                TINYINT       NOT NULL,
   creationDate        VARCHAR(15)      NOT NULL,
   modificationDate    VARCHAR(15)      NOT NULL,
-  parent              VARCHAR(100)  NULL,
+  parent              VARCHAR(100),
   deliverPayloads     TINYINT       NOT NULL,
-  maxPayloadSize      INTEGER       NULL,
-  persistItems        TINYINT       NULL,
-  maxItems            INTEGER       NULL,
+  maxPayloadSize      INTEGER,
+  persistItems        TINYINT,
+  maxItems            INTEGER,
   notifyConfigChanges TINYINT       NOT NULL,
   notifyDelete        TINYINT       NOT NULL,
   notifyRetract       TINYINT       NOT NULL,
@@ -279,16 +279,16 @@ CREATE TABLE ofPubsubNode (
   subscriptionEnabled TINYINT       NOT NULL,
   configSubscription  TINYINT       NOT NULL,
   accessModel         VARCHAR(10)   NOT NULL,
-  payloadType         VARCHAR(100)  NULL,
-  bodyXSLT            VARCHAR(100)  NULL,
-  dataformXSLT        VARCHAR(100)  NULL,
+  payloadType         VARCHAR(100),
+  bodyXSLT            VARCHAR(100),
+  dataformXSLT        VARCHAR(100),
   creator             VARCHAR(255) NOT NULL,
-  description         VARCHAR(255)  NULL,
-  language            VARCHAR(255)  NULL,
-  name                VARCHAR(50)   NULL,
-  replyPolicy         VARCHAR(15)   NULL,
-  associationPolicy   VARCHAR(15)   NULL,
-  maxLeafNodes        INTEGER       NULL,
+  description         VARCHAR(255),
+  language            VARCHAR(255),
+  name                VARCHAR(50),
+  replyPolicy         VARCHAR(15),
+  associationPolicy   VARCHAR(15),
+  maxLeafNodes        INTEGER,
   PRIMARY KEY (serviceID, nodeID)
 );
 
@@ -321,7 +321,7 @@ CREATE TABLE ofPubsubItem (
   id                  VARCHAR(100)  NOT NULL,
   jid                 VARCHAR(255)  NOT NULL,
   creationDate        VARCHAR(15)      NOT NULL,
-  payload             MEDIUMTEXT    NULL,
+  payload             MEDIUMTEXT,
   PRIMARY KEY (serviceID, nodeID, id)
 );
 
@@ -335,12 +335,12 @@ CREATE TABLE ofPubsubSubscription (
   deliver             TINYINT       NOT NULL,
   digest              TINYINT       NOT NULL,
   digest_frequency    INT           NOT NULL,
-  expire              VARCHAR(15)      NULL,
+  expire              VARCHAR(15),
   includeBody         TINYINT       NOT NULL,
-  showValues          VARCHAR(30)   NULL,
+  showValues          VARCHAR(30),
   subscriptionType    VARCHAR(10)   NOT NULL,
   subscriptionDepth   TINYINT       NOT NULL,
-  keyword             VARCHAR(200)  NULL,
+  keyword             VARCHAR(200),
   PRIMARY KEY (serviceID, nodeID, id)
 );
 
@@ -359,15 +359,14 @@ CREATE TABLE ofPubsubDefaultConf (
   publisherModel      VARCHAR(15)   NOT NULL,
   subscriptionEnabled TINYINT       NOT NULL,
   accessModel         VARCHAR(10)   NOT NULL,
-  language            VARCHAR(255)  NULL,
-  replyPolicy         VARCHAR(15)   NULL,
+  language            VARCHAR(255),
+  replyPolicy         VARCHAR(15),
   associationPolicy   VARCHAR(15)   NOT NULL,
   maxLeafNodes        INTEGER       NOT NULL,
   PRIMARY KEY (serviceID, leaf)
 );
 
--- Finally, insert default table values.
-
+-- Finally, insert default table values
 INSERT INTO ofID (idType, id) VALUES (18, 1);
 INSERT INTO ofID (idType, id) VALUES (19, 1);
 INSERT INTO ofID (idType, id) VALUES (23, 1);
