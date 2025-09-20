@@ -131,7 +131,7 @@ CREATE TABLE ofVersion (
 
 CREATE TABLE ofExtComponentConf (
   subdomain             NVARCHAR(255)    NOT NULL,
-  wildcard              INT              NOT NULL,
+  wildcard              INTEGER          NOT NULL,
   secret                NVARCHAR(255),
   permission            NVARCHAR(10)     NOT NULL,
   CONSTRAINT ofExtComponentConf_pk PRIMARY KEY (subdomain)
@@ -147,7 +147,7 @@ CREATE TABLE ofRemoteServerConf (
 CREATE TABLE ofPrivacyList (
   username              NVARCHAR(64)    NOT NULL,
   name                  NVARCHAR(100)   NOT NULL,
-  isDefault             INT             NOT NULL,
+  isDefault             INTEGER         NOT NULL,
   list                  TEXT            NOT NULL,
   CONSTRAINT ofPrivacyList_pk PRIMARY KEY (username, name)
 );
@@ -168,24 +168,24 @@ CREATE INDEX ofSecurityAuditLog_uname_idx ON ofSecurityAuditLog (username);
 -- MUC tables
 
 CREATE TABLE ofMucService (
-  serviceID           INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
   subdomain           NVARCHAR(255) NOT NULL,
   description         NVARCHAR(255),
-  isHidden            INT           NOT NULL,
+  isHidden            INTEGER       NOT NULL,
   CONSTRAINT ofMucService_pk PRIMARY KEY (subdomain)
 );
 CREATE INDEX ofMucService_serviceid_idx ON ofMucService(serviceID);
 
 CREATE TABLE ofMucServiceProp (
-  serviceID           INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
   name                NVARCHAR(100) NOT NULL,
   propValue           TEXT          NOT NULL,
   CONSTRAINT ofMucServiceProp_pk PRIMARY KEY (serviceID, name)
 );
 
 CREATE TABLE ofMucRoom (
-  serviceID           INT           NOT NULL,
-  roomID              INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
+  roomID              INTEGER       NOT NULL,
   creationDate        CHAR(15)      NOT NULL,
   modificationDate    CHAR(15)      NOT NULL,
   name                NVARCHAR(50)  NOT NULL,
@@ -193,26 +193,26 @@ CREATE TABLE ofMucRoom (
   description         NVARCHAR(255),
   lockedDate          CHAR(15)      NOT NULL,
   emptyDate           CHAR(15),
-  canChangeSubject    INT           NOT NULL,
-  maxUsers            INT           NOT NULL,
-  publicRoom          INT           NOT NULL,
-  moderated           INT           NOT NULL,
-  membersOnly         INT           NOT NULL,
-  canInvite           INT           NOT NULL,
+  canChangeSubject    INTEGER       NOT NULL,
+  maxUsers            INTEGER       NOT NULL,
+  publicRoom          INTEGER       NOT NULL,
+  moderated           INTEGER       NOT NULL,
+  membersOnly         INTEGER       NOT NULL,
+  canInvite           INTEGER       NOT NULL,
   roomPassword        NVARCHAR(50),
-  canDiscoverJID      INT           NOT NULL,
-  logEnabled          INT           NOT NULL,
-  retireOnDeletion    INT           NOT NULL,
-  preserveHistOnDel   INT           NOT NULL,
+  canDiscoverJID      INTEGER       NOT NULL,
+  logEnabled          INTEGER       NOT NULL,
+  retireOnDeletion    INTEGER       NOT NULL,
+  preserveHistOnDel   INTEGER       NOT NULL,
   subject             NVARCHAR(100),
-  rolesToBroadcast    INT           NOT NULL,
-  useReservedNick     INT           NOT NULL,
-  canChangeNick       INT           NOT NULL,
-  canRegister         INT           NOT NULL,
-  allowpm             INT,
-  fmucEnabled         INT,
+  rolesToBroadcast    INTEGER       NOT NULL,
+  useReservedNick     INTEGER       NOT NULL,
+  canChangeNick       INTEGER       NOT NULL,
+  canRegister         INTEGER       NOT NULL,
+  allowpm             INTEGER,
+  fmucEnabled         INTEGER,
   fmucOutboundNode    NVARCHAR(255),
-  fmucOutboundMode    INT,
+  fmucOutboundMode    INTEGER,
   fmucInboundNodes    NVARCHAR(2000),
   CONSTRAINT ofMucRoom_pk PRIMARY KEY (serviceID, name)
 );
@@ -220,14 +220,14 @@ CREATE INDEX ofMucRoom_roomid_idx ON ofMucRoom(roomID);
 CREATE INDEX ofMucRoom_serviceid_idx ON ofMucRoom(serviceID);
 
 CREATE TABLE ofMucRoomProp (
-  roomID                INT             NOT NULL,
+  roomID                INTEGER         NOT NULL,
   name                  NVARCHAR(100)   NOT NULL,
   propValue             TEXT            NOT NULL,
   CONSTRAINT ofMucRoomProp_pk PRIMARY KEY (roomID, name)
 );
 
 CREATE TABLE ofMucRoomRetiree (
-  serviceID           INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
   name                NVARCHAR(50)  NOT NULL,
   alternateJID        NVARCHAR(2000),
   reason              NVARCHAR(1024),
@@ -236,14 +236,14 @@ CREATE TABLE ofMucRoomRetiree (
 );
 
 CREATE TABLE ofMucAffiliation (
-  roomID              INT            NOT NULL,
+  roomID              INTEGER        NOT NULL,
   jid                 VARCHAR(255)   NOT NULL,
-  affiliation         INT            NOT NULL,
+  affiliation         INTEGER        NOT NULL,
   CONSTRAINT ofMucAffiliation_pk PRIMARY KEY (roomID,jid)
 );
 
 CREATE TABLE ofMucMember (
-  roomID              INT            NOT NULL,
+  roomID              INTEGER        NOT NULL,
   jid                 NVARCHAR(255)  NOT NULL,
   nickname            NVARCHAR(255),
   firstName           NVARCHAR(100),
@@ -255,8 +255,8 @@ CREATE TABLE ofMucMember (
 );
 
 CREATE TABLE ofMucConversationLog (
-  roomID              INT            NOT NULL,
-  messageID              INT            NOT NULL,
+  roomID              INTEGER        NOT NULL,
+  messageID              INTEGER        NOT NULL,
   sender              TEXT           NOT NULL,
   nickname            NVARCHAR(255),
   logTime             CHAR(15)       NOT NULL,
@@ -274,22 +274,22 @@ CREATE INDEX ofMucConversationLog_msg_id ON ofMucConversationLog (messageID);
 CREATE TABLE ofPubsubNode (
   serviceID           NVARCHAR(100)  NOT NULL,
   nodeID              NVARCHAR(100)  NOT NULL,
-  leaf                INT            NOT NULL,
+  leaf                INTEGER        NOT NULL,
   creationDate        CHAR(15)       NOT NULL,
   modificationDate    CHAR(15)       NOT NULL,
   parent              NVARCHAR(100),
-  deliverPayloads     INT            NOT NULL,
-  maxPayloadSize      INT,
-  persistItems        INT,
-  maxItems            INT,
-  notifyConfigChanges INT            NOT NULL,
-  notifyDelete        INT            NOT NULL,
-  notifyRetract       INT            NOT NULL,
-  presenceBased       INT            NOT NULL,
-  sendItemSubscribe   INT            NOT NULL,
+  deliverPayloads     INTEGER        NOT NULL,
+  maxPayloadSize      INTEGER,
+  persistItems        INTEGER,
+  maxItems            INTEGER,
+  notifyConfigChanges INTEGER        NOT NULL,
+  notifyDelete        INTEGER        NOT NULL,
+  notifyRetract       INTEGER        NOT NULL,
+  presenceBased       INTEGER        NOT NULL,
+  sendItemSubscribe   INTEGER        NOT NULL,
   publisherModel      NVARCHAR(15)   NOT NULL,
-  subscriptionEnabled INT            NOT NULL,
-  configSubscription  INT            NOT NULL,
+  subscriptionEnabled INTEGER        NOT NULL,
+  configSubscription  INTEGER        NOT NULL,
   accessModel         NVARCHAR(10)   NOT NULL,
   payloadType         NVARCHAR(100),
   bodyXSLT            NVARCHAR(100),
@@ -300,7 +300,7 @@ CREATE TABLE ofPubsubNode (
   name                NVARCHAR(50),
   replyPolicy         NVARCHAR(15),
   associationPolicy   NVARCHAR(15),
-  maxLeafNodes        INT,
+  maxLeafNodes        INTEGER,
   CONSTRAINT ofPubsubNode_pk PRIMARY KEY (serviceID, nodeID)
 );
 
@@ -344,37 +344,37 @@ CREATE TABLE ofPubsubSubscription (
   jid                 NVARCHAR(1024) NOT NULL,
   owner               NVARCHAR(1024) NOT NULL,
   state               NVARCHAR(15)   NOT NULL,
-  deliver             INT            NOT NULL,
-  digest              INT            NOT NULL,
-  digest_frequency    INT            NOT NULL,
+  deliver             INTEGER        NOT NULL,
+  digest              INTEGER        NOT NULL,
+  digest_frequency    INTEGER        NOT NULL,
   expire              CHAR(15),
-  includeBody         INT            NOT NULL,
+  includeBody         INTEGER        NOT NULL,
   showValues          NVARCHAR(30)   NOT NULL,
   subscriptionType    NVARCHAR(10)   NOT NULL,
-  subscriptionDepth   INT            NOT NULL,
+  subscriptionDepth   INTEGER        NOT NULL,
   keyword             NVARCHAR(200),
   CONSTRAINT ofPubsubSubscription_pk PRIMARY KEY (serviceID, nodeID, id)
 );
 
 CREATE TABLE ofPubsubDefaultConf (
   serviceID           NVARCHAR(100) NOT NULL,
-  leaf                INT           NOT NULL,
-  deliverPayloads     INT           NOT NULL,
-  maxPayloadSize      INT           NOT NULL,
-  persistItems        INT           NOT NULL,
-  maxItems            INT           NOT NULL,
-  notifyConfigChanges INT           NOT NULL,
-  notifyDelete        INT           NOT NULL,
-  notifyRetract       INT           NOT NULL,
-  presenceBased       INT           NOT NULL,
-  sendItemSubscribe   INT           NOT NULL,
+  leaf                INTEGER       NOT NULL,
+  deliverPayloads     INTEGER       NOT NULL,
+  maxPayloadSize      INTEGER       NOT NULL,
+  persistItems        INTEGER       NOT NULL,
+  maxItems            INTEGER       NOT NULL,
+  notifyConfigChanges INTEGER       NOT NULL,
+  notifyDelete        INTEGER       NOT NULL,
+  notifyRetract       INTEGER       NOT NULL,
+  presenceBased       INTEGER       NOT NULL,
+  sendItemSubscribe   INTEGER       NOT NULL,
   publisherModel      NVARCHAR(15)  NOT NULL,
-  subscriptionEnabled INT           NOT NULL,
+  subscriptionEnabled INTEGER       NOT NULL,
   accessModel         NVARCHAR(10)  NOT NULL,
   language            NVARCHAR(255),
   replyPolicy         NVARCHAR(15),
   associationPolicy   NVARCHAR(15)  NOT NULL,
-  maxLeafNodes        INT           NOT NULL,
+  maxLeafNodes        INTEGER       NOT NULL,
   CONSTRAINT ofPubsubDefaultConf_pk PRIMARY KEY (serviceID, leaf)
 );
 
