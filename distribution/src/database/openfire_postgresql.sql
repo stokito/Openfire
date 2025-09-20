@@ -193,28 +193,28 @@ CREATE TABLE ofMucRoom (
   naturalName         VARCHAR(255)  NOT NULL,
   description         VARCHAR(255),
   lockedDate          VARCHAR(15)      NOT NULL,
-  emptyDate           VARCHAR(15)      NULL,
+  emptyDate           VARCHAR(15),
   canChangeSubject    INTEGER       NOT NULL,
   maxUsers            INTEGER       NOT NULL,
   publicRoom          INTEGER       NOT NULL,
   moderated           INTEGER       NOT NULL,
   membersOnly         INTEGER       NOT NULL,
   canInvite           INTEGER       NOT NULL,
-  roomPassword        VARCHAR(50)   NULL,
+  roomPassword        VARCHAR(50),
   canDiscoverJID      INTEGER       NOT NULL,
   logEnabled          INTEGER       NOT NULL,
   retireOnDeletion    INTEGER       NOT NULL,
   preserveHistOnDel   INTEGER       NOT NULL,
-  subject             VARCHAR(100)  NULL,
+  subject             VARCHAR(100),
   rolesToBroadcast    INTEGER       NOT NULL,
   useReservedNick     INTEGER       NOT NULL,
   canChangeNick       INTEGER       NOT NULL,
   canRegister         INTEGER       NOT NULL,
-  allowpm             INTEGER       NULL,
-  fmucEnabled         INTEGER       NULL,
-  fmucOutboundNode    TEXT          NULL,
-  fmucOutboundMode    INTEGER       NULL,
-  fmucInboundNodes    TEXT          NULL,
+  allowpm             INTEGER,
+  fmucEnabled         INTEGER,
+  fmucOutboundNode    TEXT,
+  fmucOutboundMode    INTEGER,
+  fmucInboundNodes    TEXT,
   CONSTRAINT ofMucRoom_pk PRIMARY KEY (serviceID, name)
 );
 CREATE INDEX ofMucRoom_roomid_idx ON ofMucRoom(roomID);
@@ -246,12 +246,12 @@ CREATE TABLE ofMucAffiliation (
 CREATE TABLE ofMucMember (
   roomID              INTEGER        NOT NULL,
   jid                 VARCHAR(1024)  NOT NULL,
-  nickname            VARCHAR(255)   NULL,
-  firstName           VARCHAR(100)  NULL,
-  lastName            VARCHAR(100)  NULL,
-  url                 VARCHAR(100)  NULL,
-  email               VARCHAR(100)  NULL,
-  faqentry            VARCHAR(100)  NULL,
+  nickname            VARCHAR(255),
+  firstName           VARCHAR(100),
+  lastName            VARCHAR(100),
+  url                 VARCHAR(100),
+  email               VARCHAR(100),
+  faqentry            VARCHAR(100),
   CONSTRAINT ofMucMember_pk PRIMARY KEY (roomID,jid)
 );
 
@@ -259,11 +259,11 @@ CREATE TABLE ofMucConversationLog (
   roomID              INTEGER        NOT NULL,
   messageID              INTEGER        NOT NULL,
   sender              VARCHAR(1024)  NOT NULL,
-  nickname            VARCHAR(255)   NULL,
+  nickname            VARCHAR(255),
   logTime             VARCHAR(15)       NOT NULL,
-  subject             VARCHAR(255)   NULL,
-  body                TEXT           NULL,
-  stanza                TEXT           NULL
+  subject             VARCHAR(255),
+  body                TEXT,
+  stanza                TEXT
 );
 CREATE INDEX ofMucConversationLog_roomtime_idx ON ofMucConversationLog (roomID, logTime);
 CREATE INDEX ofMucConversationLog_time_idx ON ofMucConversationLog (logTime);
@@ -278,11 +278,11 @@ CREATE TABLE ofPubsubNode (
   leaf                INTEGER       NOT NULL,
   creationDate        VARCHAR(15)      NOT NULL,
   modificationDate    VARCHAR(15)      NOT NULL,
-  parent              VARCHAR(100)  NULL,
+  parent              VARCHAR(100),
   deliverPayloads     INTEGER       NOT NULL,
-  maxPayloadSize      INTEGER       NULL,
-  persistItems        INTEGER       NULL,
-  maxItems            INTEGER       NULL,
+  maxPayloadSize      INTEGER,
+  persistItems        INTEGER,
+  maxItems            INTEGER,
   notifyConfigChanges INTEGER       NOT NULL,
   notifyDelete        INTEGER       NOT NULL,
   notifyRetract       INTEGER       NOT NULL,
@@ -292,16 +292,16 @@ CREATE TABLE ofPubsubNode (
   subscriptionEnabled INTEGER       NOT NULL,
   configSubscription  INTEGER       NOT NULL,
   accessModel         VARCHAR(10)   NOT NULL,
-  payloadType         VARCHAR(100)  NULL,
-  bodyXSLT            VARCHAR(100)  NULL,
-  dataformXSLT        VARCHAR(100)  NULL,
+  payloadType         VARCHAR(100),
+  bodyXSLT            VARCHAR(100),
+  dataformXSLT        VARCHAR(100),
   creator             VARCHAR(1024) NOT NULL,
-  description         VARCHAR(255)  NULL,
-  language            VARCHAR(255)  NULL,
-  name                VARCHAR(50)   NULL,
-  replyPolicy         VARCHAR(15)   NULL,
-  associationPolicy   VARCHAR(15)   NULL,
-  maxLeafNodes        INTEGER       NULL,
+  description         VARCHAR(255),
+  language            VARCHAR(255),
+  name                VARCHAR(50),
+  replyPolicy         VARCHAR(15),
+  associationPolicy   VARCHAR(15),
+  maxLeafNodes        INTEGER,
   CONSTRAINT ofPubsubNode_pk PRIMARY KEY (serviceID, nodeID)
 );
 
@@ -334,7 +334,7 @@ CREATE TABLE ofPubsubItem (
   id                  VARCHAR(100)  NOT NULL,
   jid                 VARCHAR(1024) NOT NULL,
   creationDate        VARCHAR(15)      NOT NULL,
-  payload             TEXT          NULL,
+  payload             TEXT,
   CONSTRAINT ofPubsubItem_pk PRIMARY KEY (serviceID, nodeID, id)
 );
 
@@ -348,12 +348,12 @@ CREATE TABLE ofPubsubSubscription (
   deliver             INTEGER       NOT NULL,
   digest              INTEGER       NOT NULL,
   digest_frequency    INTEGER       NOT NULL,
-  expire              VARCHAR(15)      NULL,
+  expire              VARCHAR(15),
   includeBody         INTEGER       NOT NULL,
   showValues          VARCHAR(30)   NOT NULL,
   subscriptionType    VARCHAR(10)   NOT NULL,
   subscriptionDepth   INTEGER       NOT NULL,
-  keyword             VARCHAR(200)  NULL,
+  keyword             VARCHAR(200),
   CONSTRAINT ofPubsubSubscription_pk PRIMARY KEY (serviceID, nodeID, id)
 );
 
@@ -372,8 +372,8 @@ CREATE TABLE ofPubsubDefaultConf (
   publisherModel      VARCHAR(15)   NOT NULL,
   subscriptionEnabled INTEGER       NOT NULL,
   accessModel         VARCHAR(10)   NOT NULL,
-  language            VARCHAR(255)  NULL,
-  replyPolicy         VARCHAR(15)   NULL,
+  language            VARCHAR(255),
+  replyPolicy         VARCHAR(15),
   associationPolicy   VARCHAR(15)   NOT NULL,
   maxLeafNodes        INTEGER       NOT NULL,
   CONSTRAINT ofPubsubDefaultConf_pk PRIMARY KEY (serviceID, leaf)
