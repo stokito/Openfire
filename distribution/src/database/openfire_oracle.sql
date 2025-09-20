@@ -160,7 +160,7 @@ CREATE TABLE ofSecurityAuditLog (
 CREATE INDEX ofSecurityAuditLog_tstamp_idx ON ofSecurityAuditLog (entryStamp);
 CREATE INDEX ofSecurityAuditLog_uname_idx ON ofSecurityAuditLog (username);
 
--- MUC Tables
+-- MUC tables
 
 CREATE TABLE ofMucService (
   serviceID           INT           NOT NULL,
@@ -373,8 +373,7 @@ CREATE TABLE ofPubsubDefaultConf (
   CONSTRAINT ofPubsubDefaultConf_pk PRIMARY KEY (serviceID, leaf)
 );
 
--- Finally, insert default table values.
-
+-- Finally, insert default table values
 INSERT INTO ofID (idType, id) VALUES (18, 1);
 INSERT INTO ofID (idType, id) VALUES (19, 1);
 INSERT INTO ofID (idType, id) VALUES (23, 1);
