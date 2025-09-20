@@ -163,7 +163,7 @@ CREATE INDEX ofSecurityAuditLog_uname_idx ON ofSecurityAuditLog (username);
 -- MUC tables
 
 CREATE TABLE ofMucService (
-  serviceID           INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
   subdomain           VARCHAR2(255) NOT NULL,
   description         VARCHAR2(255),
   isHidden            INTEGER       NOT NULL,
@@ -172,15 +172,15 @@ CREATE TABLE ofMucService (
 CREATE INDEX ofMucService_serviceid_idx ON ofMucService(serviceID);
 
 CREATE TABLE ofMucServiceProp (
-  serviceID           INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
   name                VARCHAR2(100) NOT NULL,
   propValue           VARCHAR2(1024) NOT NULL,
   CONSTRAINT ofMucServiceProp_pk PRIMARY KEY (serviceID, name)
 );
 
 CREATE TABLE ofMucRoom(
-  serviceID           INT           NOT NULL,
-  roomID              INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
+  roomID              INTEGER       NOT NULL,
   creationDate        CHAR(15)      NOT NULL,
   modificationDate    CHAR(15)      NOT NULL,
   name                VARCHAR2(50)  NOT NULL,
@@ -215,14 +215,14 @@ CREATE INDEX ofMucRoom_roomid_idx ON ofMucRoom (roomID);
 CREATE INDEX ofMucRoom_serviceid_idx ON ofMucRoom (serviceID);
 
 CREATE TABLE ofMucRoomProp (
-  roomID                INT             NOT NULL,
+  roomID                INTEGER         NOT NULL,
   name                  VARCHAR2(100)   NOT NULL,
   propValue             VARCHAR2(1024)  NOT NULL,
   CONSTRAINT ofMucRoomProp_pk PRIMARY KEY (roomID, name)
 );
 
 CREATE TABLE ofMucRoomRetiree(
-  serviceID           INT           NOT NULL,
+  serviceID           INTEGER       NOT NULL,
   name                VARCHAR2(50)  NOT NULL,
   alternateJID        VARCHAR2(2000),
   reason              VARCHAR2(1024),
@@ -231,14 +231,14 @@ CREATE TABLE ofMucRoomRetiree(
 );
 
 CREATE TABLE ofMucAffiliation (
-  roomID              INT            NOT NULL,
+  roomID              INTEGER        NOT NULL,
   jid                 VARCHAR2(1024) NOT NULL,
   affiliation         INTEGER        NOT NULL,
   CONSTRAINT ofMucAffiliation_pk PRIMARY KEY (roomID, jid)
 );
 
 CREATE TABLE ofMucMember (
-  roomID              INT            NOT NULL,
+  roomID              INTEGER        NOT NULL,
   jid                 VARCHAR2(1024) NOT NULL,
   nickname            VARCHAR2(255),
   firstName           VARCHAR2(100),
@@ -250,8 +250,8 @@ CREATE TABLE ofMucMember (
 );
 
 CREATE TABLE ofMucConversationLog (
-  roomID              INT            NOT NULL,
-  messageID              INT            NOT NULL,
+  roomID              INTEGER        NOT NULL,
+  messageID              INTEGER        NOT NULL,
   sender              VARCHAR2(1024) NOT NULL,
   nickname            VARCHAR2(255),
   logTime             CHAR(15)       NOT NULL,
