@@ -9,8 +9,8 @@ CREATE TABLE ofUser (
   encryptedPassword     VARCHAR(255),
   name                  VARCHAR(100),
   email                 VARCHAR(100),
-  creationDate          VARCHAR(15)        NOT NULL,
-  modificationDate      VARCHAR(15)        NOT NULL,
+  creationDate          VARCHAR(15)     NOT NULL,
+  modificationDate      VARCHAR(15)     NOT NULL,
   PRIMARY KEY (username),
   INDEX ofUser_cDate_idx (creationDate)
 );
@@ -35,7 +35,7 @@ CREATE TABLE ofUserFlag (
 CREATE TABLE ofOffline (
   username              VARCHAR(64)     NOT NULL,
   messageID             BIGINT          NOT NULL,
-  creationDate          VARCHAR(15)        NOT NULL,
+  creationDate          VARCHAR(15)     NOT NULL,
   messageSize           INTEGER         NOT NULL,
   stanza                TEXT            NOT NULL,
   PRIMARY KEY (username, messageID)
@@ -153,7 +153,7 @@ CREATE TABLE ofSecurityAuditLog (
   INDEX ofSecurityAuditLog_uname_idx (username)
 );
 
--- MUC Tables
+-- MUC tables
 
 CREATE TABLE ofMucService (
   serviceID           BIGINT        NOT NULL,
@@ -244,7 +244,7 @@ CREATE TABLE ofMucMember (
 
 CREATE TABLE ofMucConversationLog (
   roomID              BIGINT        NOT NULL,
-  messageID        BIGINT     NOT NULL,
+  messageID           BIGINT        NOT NULL,
   sender              TEXT          NOT NULL,
   nickname            VARCHAR(255),
   logTime             VARCHAR(15)      NOT NULL,

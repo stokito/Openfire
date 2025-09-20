@@ -83,7 +83,7 @@ CREATE TABLE ofVCard (
 
 
 CREATE TABLE ofGroup (
-  groupName              VARCHAR(50)     NOT NULL,
+  groupName             VARCHAR(50)     NOT NULL,
   description           VARCHAR(255),
   CONSTRAINT ofGroup_pk PRIMARY KEY (groupName)
 );
@@ -254,10 +254,10 @@ CREATE TABLE ofMucMember (
 
 CREATE TABLE ofMucConversationLog (
   roomID              BIGINT        NOT NULL,
-  messageID         BIGINT      NOT NULL,
+  messageID           BIGINT        NOT NULL,
   sender              VARCHAR(1024) NOT NULL,
   nickname            VARCHAR(255),
-  logTime             VARCHAR(15)       NOT NULL,
+  logTime             VARCHAR(15)      NOT NULL,
   subject             VARCHAR(255),
   body                LONGVARCHAR,
   stanza             LONGVARCHAR
