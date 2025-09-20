@@ -1,6 +1,4 @@
 
--- Note: This schema has only been tested on PostgreSQL 7.3.2.
-
 CREATE TABLE ofUser (
   username              VARCHAR(64)     NOT NULL,
   storedKey             VARCHAR(32),
