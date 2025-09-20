@@ -116,7 +116,7 @@ CREATE TABLE ofProperty (
   name        VARCHAR(100)  NOT NULL,
   propValue   VARCHAR(4000) NOT NULL,
   encrypted   INTEGER,
-  iv          CHAR(24),
+  iv          VARCHAR(24),
   CONSTRAINT ofProperty_pk PRIMARY KEY (name)
 );
 
@@ -184,13 +184,13 @@ CREATE TABLE ofMucServiceProp (
 CREATE TABLE ofMucRoom (
   serviceID           BIGINT        NOT NULL,
   roomID              BIGINT        NOT NULL,
-  creationDate        CHAR(15)      NOT NULL,
-  modificationDate    CHAR(15)      NOT NULL,
+  creationDate        VARCHAR(15)      NOT NULL,
+  modificationDate    VARCHAR(15)      NOT NULL,
   name                VARCHAR(50)   NOT NULL,
   naturalName         VARCHAR(255)  NOT NULL,
   description         VARCHAR(255),
-  lockedDate          CHAR(15)      NOT NULL,
-  emptyDate           CHAR(15)      NULL,
+  lockedDate          VARCHAR(15)      NOT NULL,
+  emptyDate           VARCHAR(15)      NULL,
   canChangeSubject    INTEGER       NOT NULL,
   maxUsers            INTEGER       NOT NULL,
   publicRoom          INTEGER       NOT NULL,
@@ -257,7 +257,7 @@ CREATE TABLE ofMucConversationLog (
   messageID         BIGINT      NOT NULL,
   sender              VARCHAR(1024) NOT NULL,
   nickname            VARCHAR(255)  NULL,
-  logTime             CHAR(15)      NOT NULL,
+  logTime             VARCHAR(15)       NOT NULL,
   subject             VARCHAR(255)  NULL,
   body                LONGVARCHAR   NULL,
   stanza             LONGVARCHAR    NULL
@@ -273,8 +273,8 @@ CREATE TABLE ofPubsubNode (
   serviceID           VARCHAR(100)  NOT NULL,
   nodeID              VARCHAR(100)  NOT NULL,
   leaf                INTEGER       NOT NULL,
-  creationDate        CHAR(15)      NOT NULL,
-  modificationDate    CHAR(15)      NOT NULL,
+  creationDate        VARCHAR(15)      NOT NULL,
+  modificationDate    VARCHAR(15)      NOT NULL,
   parent              VARCHAR(100)  NULL,
   deliverPayloads     INTEGER       NOT NULL,
   maxPayloadSize      INTEGER       NULL,
@@ -330,7 +330,7 @@ CREATE TABLE ofPubsubItem (
   nodeID              VARCHAR(100)  NOT NULL,
   id                  VARCHAR(100)  NOT NULL,
   jid                 VARCHAR(1024) NOT NULL,
-  creationDate        CHAR(15)      NOT NULL,
+  creationDate        VARCHAR(15)      NOT NULL,
   payload             CLOB          NULL,
   CONSTRAINT ofPubsubItem_pk PRIMARY KEY (serviceID, nodeID, id)
 );
@@ -345,7 +345,7 @@ CREATE TABLE ofPubsubSubscription (
   deliver             INTEGER       NOT NULL,
   digest              INTEGER       NOT NULL,
   digest_frequency    INTEGER       NOT NULL,
-  expire              CHAR(15)      NULL,
+  expire              VARCHAR(15)      NULL,
   includeBody         INTEGER       NOT NULL,
   showValues          VARCHAR(30)   NOT NULL,
   subscriptionType    VARCHAR(10)   NOT NULL,

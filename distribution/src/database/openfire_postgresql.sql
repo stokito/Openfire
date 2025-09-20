@@ -9,8 +9,8 @@ CREATE TABLE ofUser (
   encryptedPassword     VARCHAR(255),
   name                  VARCHAR(100),
   email                 VARCHAR(100),
-  creationDate          CHAR(15)        NOT NULL,
-  modificationDate      CHAR(15)        NOT NULL,
+  creationDate          VARCHAR(15)     NOT NULL,
+  modificationDate      VARCHAR(15)     NOT NULL,
   CONSTRAINT ofUser_pk PRIMARY KEY (username)
 );
 CREATE INDEX ofUser_cDate_idx ON ofUser (creationDate);
@@ -27,8 +27,8 @@ CREATE TABLE ofUserProp (
 CREATE TABLE ofUserFlag (
   username              VARCHAR(64)     NOT NULL,
   name                  VARCHAR(100)    NOT NULL,
-  startTime             CHAR(15),
-  endTime               CHAR(15),
+  startTime             VARCHAR(15),
+  endTime               VARCHAR(15),
   CONSTRAINT ofUserFlag_pk PRIMARY KEY (username, name)
 );
 CREATE INDEX ofUserFlag_sTime_idx ON ofUserFlag (startTime);
@@ -38,7 +38,7 @@ CREATE INDEX ofUserFlag_eTime_idx ON ofUserFlag (endTime);
 CREATE TABLE ofOffline (
   username              VARCHAR(64)     NOT NULL,
   messageID             INTEGER         NOT NULL,
-  creationDate          CHAR(15)        NOT NULL,
+  creationDate          VARCHAR(15)        NOT NULL,
   messageSize           INTEGER         NOT NULL,
   stanza                TEXT            NOT NULL,
   CONSTRAINT ofOffline_pk PRIMARY KEY (username, messageID)
@@ -119,7 +119,7 @@ CREATE TABLE ofProperty (
   name        VARCHAR(100) NOT NULL,
   propValue   VARCHAR(4000) NOT NULL,
   encrypted   INTEGER,
-  iv          CHAR(24),
+  iv          VARCHAR(24),
   CONSTRAINT ofProperty_pk PRIMARY KEY (name)
 );
 
@@ -187,13 +187,13 @@ CREATE TABLE ofMucServiceProp (
 CREATE TABLE ofMucRoom (
   serviceID           INTEGER       NOT NULL,
   roomID              INTEGER       NOT NULL,
-  creationDate        CHAR(15)      NOT NULL,
-  modificationDate    CHAR(15)      NOT NULL,
+  creationDate        VARCHAR(15)      NOT NULL,
+  modificationDate    VARCHAR(15)      NOT NULL,
   name                VARCHAR(50)   NOT NULL,
   naturalName         VARCHAR(255)  NOT NULL,
   description         VARCHAR(255),
-  lockedDate          CHAR(15)      NOT NULL,
-  emptyDate           CHAR(15)      NULL,
+  lockedDate          VARCHAR(15)      NOT NULL,
+  emptyDate           VARCHAR(15)      NULL,
   canChangeSubject    INTEGER       NOT NULL,
   maxUsers            INTEGER       NOT NULL,
   publicRoom          INTEGER       NOT NULL,
@@ -260,7 +260,7 @@ CREATE TABLE ofMucConversationLog (
   messageID              INTEGER        NOT NULL,
   sender              VARCHAR(1024)  NOT NULL,
   nickname            VARCHAR(255)   NULL,
-  logTime             CHAR(15)       NOT NULL,
+  logTime             VARCHAR(15)       NOT NULL,
   subject             VARCHAR(255)   NULL,
   body                TEXT           NULL,
   stanza                TEXT           NULL
@@ -276,8 +276,8 @@ CREATE TABLE ofPubsubNode (
   serviceID           VARCHAR(100)  NOT NULL,
   nodeID              VARCHAR(100)  NOT NULL,
   leaf                INTEGER       NOT NULL,
-  creationDate        CHAR(15)      NOT NULL,
-  modificationDate    CHAR(15)      NOT NULL,
+  creationDate        VARCHAR(15)      NOT NULL,
+  modificationDate    VARCHAR(15)      NOT NULL,
   parent              VARCHAR(100)  NULL,
   deliverPayloads     INTEGER       NOT NULL,
   maxPayloadSize      INTEGER       NULL,
@@ -333,7 +333,7 @@ CREATE TABLE ofPubsubItem (
   nodeID              VARCHAR(100)  NOT NULL,
   id                  VARCHAR(100)  NOT NULL,
   jid                 VARCHAR(1024) NOT NULL,
-  creationDate        CHAR(15)      NOT NULL,
+  creationDate        VARCHAR(15)      NOT NULL,
   payload             TEXT          NULL,
   CONSTRAINT ofPubsubItem_pk PRIMARY KEY (serviceID, nodeID, id)
 );
@@ -348,7 +348,7 @@ CREATE TABLE ofPubsubSubscription (
   deliver             INTEGER       NOT NULL,
   digest              INTEGER       NOT NULL,
   digest_frequency    INTEGER       NOT NULL,
-  expire              CHAR(15)      NULL,
+  expire              VARCHAR(15)      NULL,
   includeBody         INTEGER       NOT NULL,
   showValues          VARCHAR(30)   NOT NULL,
   subscriptionType    VARCHAR(10)   NOT NULL,
