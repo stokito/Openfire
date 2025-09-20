@@ -11,8 +11,8 @@ CREATE TABLE ofUser (
   creationDate          CHAR(15)        NOT NULL,
   modificationDate      CHAR(15)        NOT NULL,
   CONSTRAINT ofUser_pk PRIMARY KEY (username)
-)
-CREATE INDEX ofUser_cDate_idx ON ofUser (creationDate ASC)
+);
+CREATE INDEX ofUser_cDate_idx ON ofUser (creationDate ASC);
 
 
 CREATE TABLE ofUserProp (
@@ -20,7 +20,7 @@ CREATE TABLE ofUserProp (
   name                  NVARCHAR(100)   NOT NULL,
   propValue             TEXT            NOT NULL,
   CONSTRAINT ofUserProp_pk PRIMARY KEY (username, name)
-)
+);
 
 
 CREATE TABLE ofUserFlag (
@@ -29,9 +29,9 @@ CREATE TABLE ofUserFlag (
   startTime             CHAR(15),
   endTime               CHAR(15),
   CONSTRAINT ofUserFlag_pk PRIMARY KEY (username, name)
-)
-CREATE INDEX ofUserFlag_sTime_idx ON ofUserFlag (startTime ASC)
-CREATE INDEX ofUserFlag_eTime_idx ON ofUserFlag (endTime ASC)
+);
+CREATE INDEX ofUserFlag_sTime_idx ON ofUserFlag (startTime ASC);
+CREATE INDEX ofUserFlag_eTime_idx ON ofUserFlag (endTime ASC);
 
 
 CREATE TABLE ofOffline (
@@ -41,7 +41,7 @@ CREATE TABLE ofOffline (
   messageSize           INTEGER         NOT NULL,
   stanza                TEXT            NOT NULL,
   CONSTRAINT ofOffline_pk PRIMARY KEY (username, messageID)
-)
+);
 
 
 CREATE TABLE ofPresence (
@@ -49,7 +49,7 @@ CREATE TABLE ofPresence (
   offlinePresence       TEXT,
   offlineDate           CHAR(15)        NOT NULL,
   CONSTRAINT ofPresence_pk PRIMARY KEY (username)
-)
+);
 
 
 CREATE TABLE ofRoster (
@@ -62,9 +62,9 @@ CREATE TABLE ofRoster (
   nick                  NVARCHAR(255),
   stanza                TEXT,
   CONSTRAINT ofRoster_pk PRIMARY KEY (rosterID)
-)
-CREATE INDEX ofRoster_username_idx ON ofRoster (username ASC)
-CREATE INDEX ofRoster_jid_idx ON ofRoster (jid ASC)
+);
+CREATE INDEX ofRoster_username_idx ON ofRoster (username ASC);
+CREATE INDEX ofRoster_jid_idx ON ofRoster (jid ASC);
 
 
 CREATE TABLE ofRosterGroups (
@@ -72,23 +72,23 @@ CREATE TABLE ofRosterGroups (
   rank                  INTEGER         NOT NULL,
   groupName             NVARCHAR(255)   NOT NULL,
   CONSTRAINT ofRosterGroups_pk PRIMARY KEY (rosterID, rank)
-)
-CREATE INDEX ofRosterGroups_rosterid_idx ON ofRosterGroups (rosterID ASC)
-ALTER TABLE ofRosterGroups ADD CONSTRAINT ofRosterGroups_rosterID_fk FOREIGN KEY (rosterID) REFERENCES ofRoster
+);
+CREATE INDEX ofRosterGroups_rosterid_idx ON ofRosterGroups (rosterID ASC);
+ALTER TABLE ofRosterGroups ADD CONSTRAINT ofRosterGroups_rosterID_fk FOREIGN KEY (rosterID) REFERENCES ofRoster;
 
 
 CREATE TABLE ofVCard (
   username              NVARCHAR(64)    NOT NULL,
   vcard                 TEXT            NOT NULL,
   CONSTRAINT ofVCard_pk PRIMARY KEY (username)
-)
+);
 
 
 CREATE TABLE ofGroup (
   groupName             NVARCHAR(50)   NOT NULL,
   description           NVARCHAR(255),
   CONSTRAINT ofGroup_pk PRIMARY KEY (groupName)
-)
+);
 
 
 CREATE TABLE ofGroupProp (
@@ -96,7 +96,7 @@ CREATE TABLE ofGroupProp (
    name                 NVARCHAR(100)  NOT NULL,
    propValue            TEXT           NOT NULL,
    CONSTRAINT ofGroupProp_pk PRIMARY KEY (groupName, name)
-)
+);
 
 
 CREATE TABLE ofGroupUser (
@@ -104,14 +104,14 @@ CREATE TABLE ofGroupUser (
   username              NVARCHAR(100)   NOT NULL,
   administrator         INTEGER         NOT NULL,
   CONSTRAINT ofGroupUser_pk PRIMARY KEY (groupName, username, administrator)
-)
+);
 
 
 CREATE TABLE ofID (
   idType                INTEGER         NOT NULL,
   id                    INTEGER         NOT NULL,
   CONSTRAINT ofID_pk PRIMARY KEY (idType)
-)
+);
 
 
 CREATE TABLE ofProperty (
@@ -120,14 +120,14 @@ CREATE TABLE ofProperty (
   encrypted    INTEGER,
   iv           CHAR(24),
   CONSTRAINT ofProperty_pk PRIMARY KEY (name)
-)
+);
 
 
 CREATE TABLE ofVersion (
   name     NVARCHAR(50) NOT NULL,
   version  INTEGER  NOT NULL,
   CONSTRAINT ofVersion_pk PRIMARY KEY (name)
-)
+);
 
 CREATE TABLE ofExtComponentConf (
   subdomain             NVARCHAR(255)    NOT NULL,
@@ -135,14 +135,14 @@ CREATE TABLE ofExtComponentConf (
   secret                NVARCHAR(255),
   permission            NVARCHAR(10)     NOT NULL,
   CONSTRAINT ofExtComponentConf_pk PRIMARY KEY (subdomain)
-)
+);
 
 CREATE TABLE ofRemoteServerConf (
   xmppDomain            NVARCHAR(255)    NOT NULL,
   remotePort            INTEGER,
   permission            NVARCHAR(10)     NOT NULL,
   CONSTRAINT ofRemoteServerConf_pk PRIMARY KEY (xmppDomain)
-)
+);
 
 CREATE TABLE ofPrivacyList (
   username              NVARCHAR(64)    NOT NULL,
@@ -150,8 +150,8 @@ CREATE TABLE ofPrivacyList (
   isDefault             INT             NOT NULL,
   list                  TEXT            NOT NULL,
   CONSTRAINT ofPrivacyList_pk PRIMARY KEY (username, name)
-)
-CREATE INDEX ofPrivacyList_default_idx ON ofPrivacyList (username, isDefault)
+);
+CREATE INDEX ofPrivacyList_default_idx ON ofPrivacyList (username, isDefault);
 
 CREATE TABLE ofSecurityAuditLog (
   msgID                 INTEGER         NOT NULL,
@@ -161,9 +161,9 @@ CREATE TABLE ofSecurityAuditLog (
   node                  NVARCHAR(255)   NOT NULL,
   details               TEXT,
   CONSTRAINT ofSecurityAuditLog_pk PRIMARY KEY (msgID)
-)
-CREATE INDEX ofSecurityAuditLog_tstamp_idx ON ofSecurityAuditLog (entryStamp)
-CREATE INDEX ofSecurityAuditLog_uname_idx ON ofSecurityAuditLog (username)
+);
+CREATE INDEX ofSecurityAuditLog_tstamp_idx ON ofSecurityAuditLog (entryStamp);
+CREATE INDEX ofSecurityAuditLog_uname_idx ON ofSecurityAuditLog (username);
 
 /* MUC Tables */
 
@@ -173,15 +173,15 @@ CREATE TABLE ofMucService (
   description         NVARCHAR(255),
   isHidden            INT           NOT NULL,
   CONSTRAINT ofMucService_pk PRIMARY KEY (subdomain)
-)
-CREATE INDEX ofMucService_serviceid_idx ON ofMucService(serviceID)
+);
+CREATE INDEX ofMucService_serviceid_idx ON ofMucService(serviceID);
 
 CREATE TABLE ofMucServiceProp (
   serviceID           INT           NOT NULL,
   name                NVARCHAR(100) NOT NULL,
   propValue           TEXT          NOT NULL,
   CONSTRAINT ofMucServiceProp_pk PRIMARY KEY (serviceID, name)
-)
+);
 
 CREATE TABLE ofMucRoom (
   serviceID           INT           NOT NULL,
@@ -215,16 +215,16 @@ CREATE TABLE ofMucRoom (
   fmucOutboundMode    INT,
   fmucInboundNodes    NVARCHAR(2000),
   CONSTRAINT ofMucRoom_pk PRIMARY KEY (serviceID, name)
-)
-CREATE INDEX ofMucRoom_roomid_idx on ofMucRoom(roomID)
-CREATE INDEX ofMucRoom_serviceid_idx on ofMucRoom(serviceID)
+);
+CREATE INDEX ofMucRoom_roomid_idx ON ofMucRoom(roomID);
+CREATE INDEX ofMucRoom_serviceid_idx ON ofMucRoom(serviceID);
 
 CREATE TABLE ofMucRoomProp (
   roomID                INT             NOT NULL,
   name                  NVARCHAR(100)   NOT NULL,
   propValue             TEXT            NOT NULL,
   CONSTRAINT ofMucRoomProp_pk PRIMARY KEY (roomID, name)
-)
+);
 
 CREATE TABLE ofMucRoomRetiree (
   serviceID           INT           NOT NULL,
@@ -233,14 +233,14 @@ CREATE TABLE ofMucRoomRetiree (
   reason              NVARCHAR(1024),
   retiredAt           TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT ofMucRoomRetiree_pk PRIMARY KEY (serviceID, name)
-)
+);
 
 CREATE TABLE ofMucAffiliation (
   roomID              INT            NOT NULL,
   jid                 VARCHAR(255)   NOT NULL,
   affiliation         INT            NOT NULL,
   CONSTRAINT ofMucAffiliation_pk PRIMARY KEY (roomID,jid)
-)
+);
 
 CREATE TABLE ofMucMember (
   roomID              INT            NOT NULL,
@@ -252,7 +252,7 @@ CREATE TABLE ofMucMember (
   email               NVARCHAR(100),
   faqentry            NVARCHAR(100),
   CONSTRAINT ofMucMember_pk PRIMARY KEY (roomID,jid)
-)
+);
 
 CREATE TABLE ofMucConversationLog (
   roomID              INT            NOT NULL,
@@ -263,10 +263,10 @@ CREATE TABLE ofMucConversationLog (
   subject             NVARCHAR(255),
   body                TEXT,
   stanza                TEXT
-)
-CREATE INDEX ofMucConversationLog_roomtime_idx ON ofMucConversationLog (roomID, logTime)
-CREATE INDEX ofMucConversationLog_time_idx ON ofMucConversationLog (logTime)
-CREATE INDEX ofMucConversationLog_msg_id ON ofMucConversationLog (messageID)
+);
+CREATE INDEX ofMucConversationLog_roomtime_idx ON ofMucConversationLog (roomID, logTime);
+CREATE INDEX ofMucConversationLog_time_idx ON ofMucConversationLog (logTime);
+CREATE INDEX ofMucConversationLog_msg_id ON ofMucConversationLog (messageID);
 
 
 /* PubSub Tables */
@@ -302,7 +302,7 @@ CREATE TABLE ofPubsubNode (
   associationPolicy   NVARCHAR(15),
   maxLeafNodes        INT,
   CONSTRAINT ofPubsubNode_pk PRIMARY KEY (serviceID, nodeID)
-)
+);
 
 CREATE TABLE ofPubsubNodeJIDs (
   serviceID           NVARCHAR(100)  NOT NULL,
@@ -310,14 +310,14 @@ CREATE TABLE ofPubsubNodeJIDs (
   jid                 NVARCHAR(1024) NOT NULL,
   associationType     NVARCHAR(20)   NOT NULL,
   CONSTRAINT ofPubsubNodeJIDs_pk PRIMARY KEY (serviceID, nodeID, jid)
-)
+);
 
 CREATE TABLE ofPubsubNodeGroups (
   serviceID           NVARCHAR(100)  NOT NULL,
   nodeID              NVARCHAR(100)  NOT NULL,
   rosterGroup         NVARCHAR(100)  NOT NULL
-)
-CREATE INDEX ofPubsubNodeGroups_idx ON ofPubsubNodeGroups (serviceID, nodeID)
+);
+CREATE INDEX ofPubsubNodeGroups_idx ON ofPubsubNodeGroups (serviceID, nodeID);
 
 CREATE TABLE ofPubsubAffiliation (
   serviceID           NVARCHAR(100)  NOT NULL,
@@ -325,7 +325,7 @@ CREATE TABLE ofPubsubAffiliation (
   jid                 NVARCHAR(1024) NOT NULL,
   affiliation         NVARCHAR(10)   NOT NULL,
   CONSTRAINT ofPubsubAffiliation_pk PRIMARY KEY (serviceID, nodeID, jid)
-)
+);
 
 CREATE TABLE ofPubsubItem (
   serviceID           NVARCHAR(100)  NOT NULL,
@@ -335,7 +335,7 @@ CREATE TABLE ofPubsubItem (
   creationDate        CHAR(15)       NOT NULL,
   payload             TEXT,
   CONSTRAINT ofPubsubItem_pk PRIMARY KEY (serviceID, nodeID, id)
-)
+);
 
 CREATE TABLE ofPubsubSubscription (
   serviceID           NVARCHAR(100)  NOT NULL,
@@ -354,7 +354,7 @@ CREATE TABLE ofPubsubSubscription (
   subscriptionDepth   INT            NOT NULL,
   keyword             NVARCHAR(200),
   CONSTRAINT ofPubsubSubscription_pk PRIMARY KEY (serviceID, nodeID, id)
-)
+);
 
 CREATE TABLE ofPubsubDefaultConf (
   serviceID           NVARCHAR(100) NOT NULL,
@@ -376,22 +376,22 @@ CREATE TABLE ofPubsubDefaultConf (
   associationPolicy   NVARCHAR(15)  NOT NULL,
   maxLeafNodes        INT           NOT NULL,
   CONSTRAINT ofPubsubDefaultConf_pk PRIMARY KEY (serviceID, leaf)
-)
+);
 
 /* Finally, insert default table values. */
 
-INSERT INTO ofID (idType, id) VALUES (18, 1)
-INSERT INTO ofID (idType, id) VALUES (19, 1)
-INSERT INTO ofID (idType, id) VALUES (23, 1)
-INSERT INTO ofID (idType, id) VALUES (26, 2)
-INSERT INTO ofID (idType, id) VALUES (27, 1)
+INSERT INTO ofID (idType, id) VALUES (18, 1);
+INSERT INTO ofID (idType, id) VALUES (19, 1);
+INSERT INTO ofID (idType, id) VALUES (23, 1);
+INSERT INTO ofID (idType, id) VALUES (26, 2);
+INSERT INTO ofID (idType, id) VALUES (27, 1);
 
 /* Entry for admin user */
 INSERT INTO ofUser (username, plainPassword, name, email, creationDate, modificationDate)
-    VALUES ('admin', 'admin', 'Administrator', 'admin@example.com', '0', '0')
+    VALUES ('admin', 'admin', 'Administrator', 'admin@example.com', '0', '0');
 
 /* Entry for default conference service */
-INSERT INTO ofMucService (serviceID, subdomain, isHidden) VALUES (1, 'conference', 0)
+INSERT INTO ofMucService (serviceID, subdomain, isHidden) VALUES (1, 'conference', 0);
 
 /* Do this last, as it is used by a continuous integration check to verify that the entire script was executed successfully. */
-INSERT INTO ofVersion (name, version) VALUES ('openfire', 37)
+INSERT INTO ofVersion (name, version) VALUES ('openfire', 37);
