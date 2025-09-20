@@ -153,7 +153,7 @@ CREATE TABLE ofSecurityAuditLog (
   INDEX ofSecurityAuditLog_uname_idx (username)
 );
 
-# MUC Tables
+-- MUC Tables
 
 CREATE TABLE ofMucService (
   serviceID           BIGINT        NOT NULL,
