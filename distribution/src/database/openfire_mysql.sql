@@ -256,7 +256,8 @@ CREATE TABLE ofMucConversationLog (
   INDEX ofMucConversationLog_msg_id (messageID)
 );
 
-# PubSub Tables
+
+-- PubSub Tables
 
 CREATE TABLE ofPubsubNode (
   serviceID           VARCHAR(100)  NOT NULL,
@@ -365,7 +366,7 @@ CREATE TABLE ofPubsubDefaultConf (
   PRIMARY KEY (serviceID, leaf)
 );
 
-# Finally, insert default table values.
+-- Finally, insert default table values.
 
 INSERT INTO ofID (idType, id) VALUES (18, 1);
 INSERT INTO ofID (idType, id) VALUES (19, 1);
@@ -373,12 +374,12 @@ INSERT INTO ofID (idType, id) VALUES (23, 1);
 INSERT INTO ofID (idType, id) VALUES (26, 2);
 INSERT INTO ofID (idType, id) VALUES (27, 1);
 
-# Entry for admin user
+-- Entry for admin user
 INSERT INTO ofUser (username, plainPassword, name, email, creationDate, modificationDate)
     VALUES ('admin', 'admin', 'Administrator', 'admin@example.com', '0', '0');
 
-# Entry for default conference service
+-- Entry for default conference service
 INSERT INTO ofMucService (serviceID, subdomain, isHidden) VALUES (1, 'conference', 0);
 
-# Do this last, as it is used by a continuous integration check to verify that the entire script was executed successfully.
+-- Do this last, as it is used by a continuous integration check to verify that the entire script was executed successfully.
 INSERT INTO ofVersion (name, version) VALUES ('openfire', 37);
