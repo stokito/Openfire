@@ -122,7 +122,7 @@ CREATE TABLE ofProperty (
 
 
 CREATE TABLE ofVersion (
-  name  varchar(50)  NOT NULL,
+  name     VARCHAR(50)  NOT NULL,
   version  INTEGER  NOT NULL,
   CONSTRAINT ofVersion_pk PRIMARY KEY (name)
 );
@@ -163,7 +163,7 @@ CREATE TABLE ofSecurityAuditLog (
 CREATE INDEX ofSecurityAuditLog_tstamp_idx ON ofSecurityAuditLog (entryStamp);
 CREATE INDEX ofSecurityAuditLog_uname_idx ON ofSecurityAuditLog (username);
 
-// MUC Tables
+-- MUC Tables
 
 CREATE TABLE ofMucService (
   serviceID           BIGINT        NOT NULL,
@@ -266,7 +266,8 @@ CREATE INDEX ofMucConversationLog_roomtime_idx ON ofMucConversationLog (roomID, 
 CREATE INDEX ofMucConversationLog_time_idx ON ofMucConversationLog (logTime);
 CREATE INDEX ofMucConversationLog_msg_id ON ofMucConversationLog (messageID);
 
-// PubSub Tables
+
+-- PubSub Tables
 
 CREATE TABLE ofPubsubNode (
   serviceID           VARCHAR(100)  NOT NULL,
@@ -375,7 +376,7 @@ CREATE TABLE ofPubsubDefaultConf (
   CONSTRAINT ofPubsubDefaultConf_pk PRIMARY KEY (serviceID, leaf)
 );
 
-// Finally, insert default table values.
+-- Finally, insert default table values.
 
 INSERT INTO ofID (idType, id) VALUES (18, 1);
 INSERT INTO ofID (idType, id) VALUES (19, 1);
@@ -383,14 +384,14 @@ INSERT INTO ofID (idType, id) VALUES (23, 1);
 INSERT INTO ofID (idType, id) VALUES (26, 2);
 INSERT INTO ofID (idType, id) VALUES (27, 1);
 
-// Entry for admin user
+-- Entry for admin user
 INSERT INTO ofUser (username, plainPassword, name, email, creationDate, modificationDate)
     VALUES ('admin', 'admin', 'Administrator', 'admin@example.com', '0', '0');
 
-// Entry for default conference service
+-- Entry for default conference service
 INSERT INTO ofMucService (serviceID, subdomain, isHidden) VALUES (1, 'conference', 0);
 
-// Do this last, as it is used by a continuous integration check to verify that the entire script was executed successfully.
+-- Do this last, as it is used by a continuous integration check to verify that the entire script was executed successfully.
 INSERT INTO ofVersion (name, version) VALUES ('openfire', 37);
 
 // The value is the size in megabytes that the .log file can reach before an automatic
