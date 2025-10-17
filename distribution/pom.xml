@@ -68,6 +68,15 @@
                             <outputDirectory>${project.build.directory}${file.separator}distribution-base${file.separator}plugins</outputDirectory>
                             <destFileName>search.jar</destFileName>
                         </artifactItem>
+                        <artifactItem>
+                            <groupId>org.igniterealtime.openfire.plugins</groupId>
+                            <artifactId>httpfileupload</artifactId>
+                            <type>jar</type>
+                            <classifier>openfire-plugin-assembly</classifier>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}${file.separator}distribution-base${file.separator}plugins</outputDirectory>
+                            <destFileName>httpfileupload.jar</destFileName>
+                        </artifactItem>
                     </artifactItems>
                 </configuration>
             </plugin>
@@ -127,6 +136,13 @@
             <groupId>org.igniterealtime.openfire.plugins</groupId>
             <artifactId>search</artifactId>
             <version>1.7.5</version>
+            <classifier>openfire-plugin-assembly</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.igniterealtime.openfire.plugins</groupId>
+            <artifactId>httpfileupload</artifactId>
+            <version>1.5.0</version>
             <classifier>openfire-plugin-assembly</classifier>
             <scope>provided</scope>
         </dependency>
