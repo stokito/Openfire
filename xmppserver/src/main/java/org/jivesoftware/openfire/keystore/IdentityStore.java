@@ -520,6 +520,10 @@ public class IdentityStore extends CertificateStore
     public synchronized void addSelfSignedDomainCertificate() throws CertificateStoreConfigException
     {
         String algorithm = JiveGlobals.getProperty( "cert.algorithm", "RSA" );
+        if (algorithm.equals("DSA")) {
+            // replace obsolete DSA with RSA
+            algorithm = "RSA";
+        }
 
         final int keySize;
         final String signAlgorithm;
@@ -528,12 +532,8 @@ public class IdentityStore extends CertificateStore
                 keySize = JiveGlobals.getIntProperty("cert.rsa.keysize", 2048);
                 signAlgorithm = JiveGlobals.getProperty("cert.rsa.algorithm", "SHA256WITHRSAENCRYPTION");
             }
-            case "DSA" -> {
-                keySize = JiveGlobals.getIntProperty("cert.dsa.keysize", 1024);
-                signAlgorithm = JiveGlobals.getProperty("cert.dsa.algorithm", "SHA256withDSA");
-            }
             default ->
-                throw new IllegalArgumentException("Unsupported algorithm '" + algorithm + "'. Use 'RSA' or 'DSA'.");
+                throw new IllegalArgumentException("Unsupported algorithm '" + algorithm + "'. Use 'RSA'.");
         }
 
         final String name = XMPPServerInfo.XMPP_DOMAIN.getValue().toLowerCase();
@@ -582,11 +582,11 @@ public class IdentityStore extends CertificateStore
     }
 
     /**
-     * Returns a new public &amp; private key with the specified algorithm (e.g. DSA, RSA, etc.).
+     * Returns a new public &amp; private key with the specified algorithm (e.g. RSA, etc.).
      *
-     * @param algorithm DSA, RSA, etc.
+     * @param algorithm RSA, etc.
      * @param keySize the desired key size. This is an algorithm-specific metric, such as modulus length, specified in number of bits.
-     * @return a new public &amp; private key with the specified algorithm (e.g. DSA, RSA, etc.).
+     * @return a new public &amp; private key with the specified algorithm (e.g. RSA, etc.).
      * @throws GeneralSecurityException if the supplied algorithm does not have a key-pair generator
      */
     protected static synchronized KeyPair generateKeyPair( String algorithm, int keySize ) throws GeneralSecurityException
